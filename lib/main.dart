@@ -31,6 +31,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int number = 10;
+  String? errorMessage;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +41,38 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(errorMessage ?? ''),
             Text(
               '$number',
               style: const TextStyle(fontSize: 40),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
-                  number += 1;  
+                  isLoading = true;
+                  errorMessage = null;
+                });
+                final repo = FakeRepository();
+                final result = await repo.fetchData();
+                setState(() {
+                  number += 1; 
+                  errorMessage = result;
+                  isLoading = false;
                 });
               },
               child: const Text('Jazda w to!'),
-            )
+            ),
+            if (isLoading) const CircularProgressIndicator(),
           ],
         ),
       ),
     );
+  }
+}
+
+class FakeRepository {
+  Future<String> fetchData() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return 'KLASA';
   }
 }
