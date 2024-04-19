@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_learning/cubit/home_cubit.dart';
+import 'package:state_learning/repositories/fake_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,10 +64,4 @@ class HomeCubitPage extends StatelessWidget {
 }
 
 
-class FakeRepository {
-  Future<String> fetchData() async {
-    await Future.delayed(const Duration(seconds: 1));
-    // throw Exception('Coś poszło nie tak!');
-    return 'Przyszły dane';
-  }
-}
+
