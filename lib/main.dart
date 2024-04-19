@@ -50,15 +50,23 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 setState(() {
                   isLoading = true;
-                  errorMessage = null;
                 });
                 final repo = FakeRepository();
-                final result = await repo.fetchData();
-                setState(() {
-                  number += 1; 
-                  errorMessage = result;
+                try {
+                  await repo.fetchData();
+                  setState(() {
+                    number += 1; 
+                    errorMessage = null;
+                    isLoading = false;
+                  });
+                } 
+                catch (exception) {
+                  setState(() {
+                  number -= 1; 
+                  errorMessage = exception.toString();
                   isLoading = false;
-                });
+                  });
+                }
               },
               child: const Text('Jazda w to!'),
             ),
@@ -73,6 +81,7 @@ class _HomePageState extends State<HomePage> {
 class FakeRepository {
   Future<String> fetchData() async {
     await Future.delayed(const Duration(seconds: 1));
-    return 'KLASA';
+    // throw Exception('Coś poszło nie tak!');
+    return '';
   }
 }
