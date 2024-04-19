@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -26,8 +25,17 @@ class HomePage extends StatelessWidget {
     super.key,
   });
 
+  final number = 10;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Text(
+          '$number',
+          style: const TextStyle(fontSize: 40),
+        ),
+      ),
+    );
   }
 }
