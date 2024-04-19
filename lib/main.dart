@@ -44,7 +44,11 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(fontSize: 40),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  number += 1;  
+                });
+              },
               child: const Text('Jazda w to!'),
             )
           ],
