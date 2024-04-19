@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_learning/main.dart';
+import 'package:state_learning/repositories/fake_repository.dart';
 
 part 'home_state.dart';
 
@@ -9,7 +9,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchData() async {
     emit(
-      state.copyWith(isLoading: true)
+      state.copyWith(isLoading: true,
+        errorMessage: '')
     );
     try {
       final results = await _fakeRepository.fetchData();
