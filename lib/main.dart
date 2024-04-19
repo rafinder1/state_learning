@@ -20,20 +20,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
 
-  final number = 10;
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int number = 10;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          '$number',
-          style: const TextStyle(fontSize: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$number',
+              style: const TextStyle(fontSize: 40),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Jazda w to!'),
+            )
+          ],
         ),
       ),
     );
