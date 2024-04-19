@@ -8,20 +8,18 @@ class HomeCubit extends Cubit<HomeState> {
   final FakeRepository _fakeRepository;
 
   Future<void> fetchData() async {
-    emit(HomeState(
-      isLoading: true,
-      number: state.number,
-    ));
-
+    emit(
+      state.copyWith(isLoading: true)
+    );
     try {
       final results = await _fakeRepository.fetchData();
-      emit(HomeState(
+      emit(state.copyWith(
         isLoading: false,
         results: results,
         number: state.number + 1,
       ));
     } catch (exception) {
-      emit(HomeState(
+      emit(state.copyWith(
         isLoading: false,
         errorMessage: exception.toString(),
         number: state.number - 1,
