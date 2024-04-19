@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_learning/repositories/fake_repository.dart';
 
 part 'home_state.dart';
+
+part 'home_cubit.freezed.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._fakeRepository) : super(const HomeState());
@@ -10,7 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchData() async {
     emit(
       state.copyWith(isLoading: true,
-        errorMessage: '')
+        errorMessage: null)
     );
     try {
       final results = await _fakeRepository.fetchData();
