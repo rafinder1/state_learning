@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:state_learning/datasources/remote_data_source.dart';
 
+
 @lazySingleton  
 class FakeRepository {
   final RemoteDataSource _remoteDataSource;
