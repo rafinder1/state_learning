@@ -1,15 +1,16 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:state_learning/repositories/todo_model.dart';
+import 'package:state_learning/datasources/remote_data_source.dart';
 
 class FakeRepository {
+  final RemoteDataSource _remoteDataSource;
+
+  FakeRepository(this._remoteDataSource);
+
   Future<String> fetchData() async {
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
-    final response = await http.get(url);
+    const isNetworkOnline = true;
+    if (isNetworkOnline) {
+      final results = _remoteDataSource.fetchData();
 
-    final todoModel = Todo.fromJson(json.decode(response.body));
-
-    return todoModel.title ?? 'nie maa';
+    return results;
+    } 
   }
 }
